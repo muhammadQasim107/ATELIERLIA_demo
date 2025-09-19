@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier Lia</title>
+<link rel="icon" type="image/png" href="./mark_Color.png.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;height:100vh;overflow:hidden;
+  background:#111;font-family:'Cinzel',serif;color:#fff;
+}
+
+/* Gradient overlay */
+#lightOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2; /* door ke upar, logo ke neeche */
+  pointer-events: none;
+  opacity: 0; /* loader ke waqt hidden */
+  transition: opacity 1.5s ease;
+  background: radial-gradient(circle at center, rgba(120,0,200,0.6) 0%, rgba(120,0,200,0) 22%),
+              radial-gradient(circle at left, rgba(0,0,120,1) 9%, rgba(0,0,120,0) 60%),
+              radial-gradient(circle at right, rgba(120,0,0,1) 15%, rgba(120,0,0,0) 50%),
+              radial-gradient(circle at top, rgba(0,0,120,0.4) 0%, rgba(0,0,120,0) 60%),
+              radial-gradient(circle at bottom, rgba(120,0,0,0.4) 0%, rgba(120,0,0,0) 50%);
+}
+#lightOverlay.show { opacity: 1; }  /* door load hone ke baad */
+#lightOverlay.hide { opacity: 0; }  /* click par fade out */
+
+/* Three.js door container */
+#threeContainer {
+  position:absolute;inset:0;
+  z-index:1;
+  opacity:0; /* loader complete ke baad hi visible */
+  transition:opacity 1s ease;
+}
+
+/* Splash loader */
+.splash {
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:65px;height:85px;
+  z-index:10;
+  cursor:pointer;
+  text-align:center;
+  transition:transform 2s ease;
+}
+.splash img.dark,.splash img.color {
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+}
+.splash img.dark { z-index:1; transform:scale(0.9); animation:darkZoom 12s ease forwards; }
+.splash img.color { z-index:2; clip-path:inset(100% 0 0 0); transform:scale(0.9);
+  animation:revealUp 6s ease forwards, zoomIn 6.9s ease forwards; }
+
+/* Percentages around logo */
+.percent { 
+  position:absolute;
+  font-size:9px;
+  font-weight:300;
+  color:#ffffffa8;
+  font-family:'Cinzel',serif;
+}
+.top{top:-25px;left:50%;transform:translateX(-50%);}
+.bottom{bottom:-25px;left:50%;transform:translateX(-50%);}
+.left{left:-40px;top:50%;transform:translateY(-50%);}
+.right{right:-40px;top:50%;transform:translateY(-50%);}
+
+.final-wrapper {
+  position:absolute;top:50%;left:65px;height:85px;
+  display:flex;align-items:center;
+  padding-left:20px;overflow:hidden;
+  transform:translateY(-50%);
+  z-index:3;
+}
+.final-image { height:60px;width:auto;transform:translateX(-100%);opacity:0; }
+.final-image.show { animation:slideOut 2s ease forwards; }
+
+/* Animations */
+@keyframes darkZoom{0%{transform:scale(0.9)}100%{transform:scale(1.05)}}
+@keyframes revealUp{0%{clip-path:inset(100% 0 0 0)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes zoomIn{0%{transform:scale(0.9)}100%{transform:scale(1.05)}}
+@keyframes slideOut {
+  0%{transform:translateX(-100%);opacity:0}
+  20%{opacity:1}
+  100%{transform:translateX(0);opacity:1}
+}
+.move-left { transform:translate(calc(-50% - 130px), -50%); }
+</style>
+</head>
+<body>
+<!-- Gradient Overlay -->
+<div id="lightOverlay"></div>
+
+<!-- Door background -->
+<div id="threeContainer"></div>
+
+<!-- Splash overlay -->
+<div class="splash" id="splash">
+  <img src="mark_Dark.png.png" class="dark" alt="dark logo">
+  <img src="mark_Color.png.png" class="color" alt="color logo">
+  
+  <!-- 4 Percentages -->
+  <div class="percent top" id="percentTop">0%</div>
+  <div class="percent bottom" id="percentBottom">0%</div>
+  <div class="percent left" id="percentLeft">0%</div>
+  <div class="percent right" id="percentRight">0%</div>
+
+  <div class="final-wrapper">
+    <img src="AtelierLia3.png" class="final-image" id="finalImage" alt="Atelier Lia">
+  </div>
+</div>
+
+<!-- Three.js + GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+<script>
+let percent=0;
+const percentEls = [
+  document.getElementById("percentTop"),
+  document.getElementById("percentBottom"),
+  document.getElementById("percentLeft"),
+  document.getElementById("percentRight")
+];
+const splash=document.getElementById("splash");
+const finalImage=document.getElementById("finalImage");
+const threeContainer=document.getElementById("threeContainer");
+const lightOverlay=document.getElementById("lightOverlay");
+
+let scene,camera,renderer,controls;
+let door,mixer,actions={},clock=new THREE.Clock();
+let readyForClick=false;
+
+/* Loader Counter */
+const duration=4000;
+const stepTime=duration/100;
+const timer=setInterval(()=>{
+  percent++;
+  percentEls.forEach(el=>el.textContent=percent+"%");
+  if(percent>=100){
+    clearInterval(timer);
+    percentEls.forEach(el=>el.style.display="none");
+
+    splash.classList.add("move-left");
+    setTimeout(()=>finalImage.classList.add("show"), 800);
+
+    finalImage.addEventListener("animationend", ()=>{
+      threeContainer.style.opacity="1";  // background visible
+      lightOverlay.classList.add("show"); // 👈 gradient lights ON
+      readyForClick=true;
+    });
+  }
+}, stepTime);
+
+/* Three.js Scene */
+scene=new THREE.Scene();
+camera=new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+renderer=new THREE.WebGLRenderer({antialias:true, alpha:true});
+renderer.setClearColor(0x000000,1);
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+threeContainer.appendChild(renderer.domElement);
+
+// Lights
+scene.add(new THREE.HemisphereLight(0xffffff,0x444444,1.2));
+const dir=new THREE.DirectionalLight(0xffffff,1.5);
+dir.position.set(5,10,7);
+scene.add(dir);
+
+// Controls
+controls=new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping=false;
+controls.enableZoom=false;
+controls.enableRotate=false;
+controls.enablePan=false;
+
+// Load Door GLB
+new THREE.GLTFLoader().load("./Door_Animation.glb",(gltf)=>{
+  door=gltf.scene;
+  scene.add(door);
+
+  fitCameraToObject(camera, door, 1.2);
+
+  mixer=new THREE.AnimationMixer(door);
+  gltf.animations.forEach((clip)=>actions[clip.name]=mixer.clipAction(clip));
+});
+
+function fitCameraToObject(camera, object, offset = 0.19) {
+  const box = new THREE.Box3().setFromObject(object);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  object.position.sub(center);
+
+  const fov = camera.fov * (Math.PI / 180);
+  const aspect = camera.aspect;
+  const cameraZByHeight = (size.y / 2) / Math.tan(fov / 2);
+  const cameraZByWidth  = (size.x / 2) / (Math.tan(fov / 2) * aspect);
+  let cameraZ = Math.max(cameraZByHeight, cameraZByWidth);
+  cameraZ *= 0.19;
+
+  camera.position.set(0, 0, cameraZ);
+  camera.lookAt(0, 0, 0);
+  controls.target.set(0, 0, 0);
+  controls.update();
+}
+
+// Click → play animation + camera zoom
+splash.addEventListener("click",()=>{
+  if(!readyForClick || !door || !mixer) return;
+
+  gsap.to(splash,{duration:1.5,opacity:0,onComplete:()=>splash.style.display="none"});
+
+  const anim=actions["Open"]||Object.values(actions)[0];
+  if(anim){
+    anim.reset().setLoop(THREE.LoopOnce,1);
+    anim.clampWhenFinished=true;
+    anim.play();
+  }
+
+  // Camera zoom
+  gsap.to(camera.position,{duration:7,z:0.5,ease:"power1.inOut"});
+
+  // 👇 Gradient ko delay ke saath fade out karo (e.g. 3 sec delay)
+  gsap.to(lightOverlay, {
+    opacity: 0,
+    duration: 0.9,
+    delay: 2.29,        // ⏳ 3 sec baad hide hoga
+    ease: "power2.out",
+    onComplete: ()=> lightOverlay.classList.remove("show")
+  });
+
+  readyForClick=false;
+});
+/* Animate loop */
+function animate(){
+  requestAnimationFrame(animate);
+  const dt=clock.getDelta();
+  if(mixer) mixer.update(dt);
+  controls.update();
+  renderer.render(scene,camera);
+}
+animate();
+
+window.addEventListener("resize",()=>{
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
