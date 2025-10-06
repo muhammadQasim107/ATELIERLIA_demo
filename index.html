@@ -1,86 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Atelier Lia</title>
 <link rel="icon" type="image/png" href="./mark_Color.png.png">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
-
 <style>
-body {margin:0;height:100vh;overflow:hidden;background:#111;font-family:'Cinzel',serif;color:#fff;}
-/*#lightOverlay {
-  position: absolute; inset: 0; z-index: 2;
-  pointer-events: none; opacity: 0; transition: opacity 1.5s ease;
-  background: radial-gradient(circle at center, rgba(120,0,200,0.6) 0%, rgba(120,0,200,0) 22%),
-              radial-gradient(circle at left, rgba(0,0,120,1) 9%, rgba(0,0,120,0) 60%),
-              radial-gradient(circle at right, rgba(120,0,0,1) 15%, rgba(120,0,0,0) 50%),
-              radial-gradient(circle at top, rgba(0,0,120,0.4) 0%, rgba(0,0,120,0) 60%),
-              radial-gradient(circle at bottom, rgba(120,0,0,0.4) 0%, rgba(120,0,0,0) 50%);
-}*/
-#lightOverlay.show { opacity: 1; }
-#threeContainer {position:absolute; inset:0; z-index:1; opacity:0; transition:opacity 1s ease;}
-.splash {
-  position:absolute;left:50%;top:50%; transform:translate(-50%,-50%);
-  width:65px;height:85px; z-index:10; cursor:pointer; text-align:center;
-  transition:transform 2s ease;
-}
-.splash img.dark,.splash img.color {position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
-.splash img.dark { z-index:1; transform:scale(0.9); animation:darkZoom 12s ease forwards; }
-.splash img.color { z-index:2; clip-path:inset(100% 0 0 0); transform:scale(0.9);
-  animation:revealUp 6s ease forwards, zoomIn 6.9s ease forwards; }
-.percent { position:absolute;font-size:9px;font-weight:300;color:#ffffffa8;font-family:'Cinzel',serif; }
-.top{top:-25px;left:50%;transform:translateX(-50%);}
-.bottom{bottom:-25px;left:50%;transform:translateX(-50%);}
-.left{left:-40px;top:50%;transform:translateY(-50%);}
-.right{right:-40px;top:50%;transform:translateY(-50%);}
-.final-wrapper {position:absolute;top:50%;left:65px;height:85px;display:flex;align-items:center;
-  padding-left:20px;overflow:hidden;transform:translateY(-50%);z-index:3;}
-.final-image { height:60px;width:auto;transform:translateX(-100%);opacity:0; }
-.final-image.show { animation:slideOut 2s ease forwards; }
-@keyframes darkZoom{0%{transform:scale(0.9)}100%{transform:scale(1.05)}}
-@keyframes revealUp{0%{clip-path:inset(100% 0 0 0)}100%{clip-path:inset(0 0 0 0)}}
-@keyframes zoomIn{0%{transform:scale(0.9)}100%{transform:scale(1.05)}}
-@keyframes slideOut {0%{transform:translateX(-100%);opacity:0}20%{opacity:1}100%{transform:translateX(0);opacity:1}}
-.move-left { transform:translate(calc(-50% - 160px), -50%); }
+  body {margin:0;height:100vh;overflow:hidden;background:#000;font-family:'Cinzel',serif;color:#fff;}
+  #threeContainer {position:absolute; inset:0; z-index:1; opacity:0; transition:opacity 1s ease;}
+
+  .splash {
+    position:absolute;left:50%;top:50%; transform:translate(-50%,-50%);
+    width:65px;height:85px; z-index:10; cursor:pointer; text-align:center;
+    transition:transform 4s ease;
+  }
+  .splash img.dark,.splash img.color {position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
+  .splash img.dark { z-index:1; transform:scale(0.9); animation:darkZoom 12s ease forwards; }
+  .splash img.color { z-index:2; clip-path:inset(100% 0 0 0); transform:scale(0.15);
+    animation:revealUp 25.2s ease forwards, zoomIn 6.9s ease forwards; }
+
+  .percent { position:absolute;font-size:9px;font-weight:300;color:#ffffffa8;font-family:'Cinzel',serif; }
+  .top{top:-25px;left:50%;transform:translateX(-50%);} 
+  .bottom{bottom:-25px;left:50%;transform:translateX(-50%);}
+  .left{left:-40px;top:50%;transform:translateY(-50%);} 
+  .right{right:-40px;top:50%;transform:translateY(-50%);}
+
+  .final-wrapper {position:absolute;top:50%;left:65px;height:85px;display:flex;align-items:center;
+    padding-left:20px;overflow:hidden;transform:translateY(-50%);z-index:3;}
+  .final-image { height:60px;width:auto;transform:translateX(-100%);opacity:0; }
+  .final-image.show { animation:slideOut 4.75s ease forwards; }
+
+  @keyframes darkZoom{0%{transform:scale(0.9)}100%{transform:scale(1.05)}}
+  @keyframes revealUp{0%{clip-path:inset(100% 0 0 0)}100%{clip-path:inset(0 0 0 0)}}
+  @keyframes zoomIn{0%{transform:scale(0.9)}100%{transform:scale(1.05)}}
+  @keyframes slideOut {0%{transform:translateX(-100%);opacity:0}20%{opacity:1}100%{transform:translateX(0);opacity:1}}
+  .move-left { transform:translate(calc(-50% - 160px), -50%); }
+
+  #knockText {
+    position: absolute; top: 44%; left: 50%;
+    transform: translate(-35%, -50%) scale(0.9);
+    font-size: 22px; font-style: italic;
+    font-family: "Sixtyfour Convergence", sans-serif;
+    color: #ff66ff; letter-spacing: 2px; opacity: 0; z-index: 20;
+    text-shadow: 0 0 6px rgba(255,100,255,.6), 0 0 12px rgba(255,100,255,.4), 0 0 22px rgba(255,100,255,.2);
+  }
+  #knockText.show { animation: textAppear 1.5s ease forwards, textPulse 2.5s ease-in-out infinite; }
+  #knockText.hide  { animation: textDisappear 0.8s ease forwards; }
+  @keyframes textAppear { 0% { opacity:0; transform: translate(-35%,-50%) scale(0.8);} 100% {opacity:1; transform: translate(-35%,-50%) scale(1);} }
+  @keyframes textDisappear { 0% { opacity:1; transform: translate(-35%,-50%) scale(1);} 100% {opacity:0; transform: translate(-35%,-50%) scale(0.9);} }
+  @keyframes textPulse {
+    0%,100% { text-shadow: 0 0 6px rgba(255,150,255,.6),0 0 12px rgba(255,150,255,.4),0 0 22px rgba(255,150,255,.2); transform: translate(-35%,-50%) scale(1);}
+    50%     { text-shadow: 0 0 10px rgba(255,150,255,.9),0 0 20px rgba(255,150,255,.7),0 0 35px rgba(255,150,255,.5); transform: translate(-35%,-50%) scale(1.05);}
+  }
 </style>
 </head>
 <body>
-<div id="lightOverlay"></div>
-<div id="threeContainer"></div>
+  <div id="threeContainer"></div>
 
-<div class="splash" id="splash">
-  <img src="mark_Dark.png.png" class="dark" alt="dark logo">
-  <img src="mark_Color.png.png" class="color" alt="color logo">
-  <div class="percent top" id="percentTop">0%</div>
-  <div class="percent bottom" id="percentBottom">0%</div>
-  <div class="percent left" id="percentLeft">0%</div>
-  <div class="percent right" id="percentRight">0%</div>
-  <div class="final-wrapper">
-    <img src="AtelierLia3.png" class="final-image" id="finalImage" alt="Atelier Lia">
+  <div class="splash" id="splash">
+    <img src="mark_Dark.png.png" class="dark" alt="dark logo">
+    <img src="mark_Color.png.png" class="color" alt="color logo">
+    <div class="percent top" id="percentTop">0%</div>
+    <div class="percent bottom" id="percentBottom">0%</div>
+    <div class="percent left" id="percentLeft">0%</div>
+    <div class="percent right" id="percentRight">0%</div>
+    <div class="final-wrapper">
+      <img src="AtelierLia3.png" class="final-image" id="finalImage" alt="Atelier Lia">
+    </div>
   </div>
-</div>
+  <div id="knockText">KNOCK THE DOOR</div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <!-- libs -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
 
-<script>
+
+  <script>
+/* =========================== */
+/* ======= LOADER UI ========= */
+/* =========================== */
 let percent=0;
 const percentEls=[percentTop,percentBottom,percentLeft,percentRight];
 const splash=document.getElementById("splash");
 const finalImage=document.getElementById("finalImage");
 const threeContainer=document.getElementById("threeContainer");
-const lightOverlay=document.getElementById("lightOverlay");
+const knockText=document.getElementById("knockText");
 
 let scene,camera,renderer,controls;
-let door,mixer,actions={},clock=new THREE.Clock();
+let root,mixer,actions={},clock=new THREE.Clock();
 let readyForClick=false;
 
-/* Loader Counter */
-const duration=4000;
-const stepTime=duration/100;
+const duration=16000, stepTime=duration/100; //16000
 const timer=setInterval(()=>{
   percent++;
   percentEls.forEach(el=>el.textContent=percent+"%");
@@ -91,125 +105,768 @@ const timer=setInterval(()=>{
     setTimeout(()=>finalImage.classList.add("show"),800);
     finalImage.addEventListener("animationend", ()=>{
       threeContainer.style.opacity="1";
-      lightOverlay.classList.add("show");
-      readyForClick=true;
+      readyForClick = true;
+      knockText.classList.add("show");
     });
   }
 }, stepTime);
 
-/* Scene setup */
+/* =========================== */
+/* ===== THREE BASICS ======== */
+/* =========================== */
 scene=new THREE.Scene();
-camera=new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera=new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.9, 8000);
+camera.up.set(0,1,0); // lock up axis
+
 renderer=new THREE.WebGLRenderer({antialias:true, alpha:false});
 renderer.setClearColor(0x000000,1);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 threeContainer.appendChild(renderer.domElement);
 
-/* Lights */
-scene.add(new THREE.HemisphereLight(0xffffff,0x444444,1.2));
-const dir=new THREE.DirectionalLight(0xffffff,1.5);
-dir.position.set(5,10,7);
-scene.add(dir);
 
-/* Controls */
+renderer.physicallyCorrectLights = true;        // realistic falloff
+renderer.outputEncoding = THREE.sRGBEncoding;   // correct color space
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;             // try 0.9–1.4 per scene
+
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+pmrem.compileEquirectangularShader();
+
+new THREE.RGBELoader()
+  .setDataType(THREE.UnsignedByteType)
+  .load('dikhololo_night_1k.hdr', (hdr) => {
+    const env = pmrem.fromEquirectangular(hdr).texture;
+    scene.environment = env;          // reflections+lighting for PBR mats
+    // scene.background = env;        // background bhi chahiye to uncomment
+    hdr.dispose();
+    pmrem.dispose();
+  });
+
+// REMOVE or lower this:
+// scene.add(new THREE.AmbientLight(0xffffff, 3.6));
+// const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+// dirLight.position.set(0,0.3,6);
+// scene.add(dirLight);
+
+// Better setup:
+const hemi = new THREE.HemisphereLight(0xffffff, 0x202030, 0.6); // sky/ground
+scene.add(hemi);
+
+const key = new THREE.DirectionalLight(0xffffff, 1.0);
+key.position.set(3, 4, 6);
+scene.add(key);
+
+const rim = new THREE.DirectionalLight(0x88aaff, 0.55);
+rim.position.set(-4, 3, -2);
+scene.add(rim);
+
 controls=new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping=false;
 
-/* Load Door */
-new THREE.GLTFLoader().load("./Door_Animation.glb",(gltf)=>{
-  door=gltf.scene;
-  scene.add(door);
+let riversReady = false;
+// --- frame time for framerate independence ---
+let dtSec = 0.016;
 
-  // ✅ Door correct position loader ke turant baad hi
-  fitCameraToObject(camera, door, 0.19);
+// frame delta (for smooth, fps-independent physics)
+let delta = 1/60;
 
-  mixer=new THREE.AnimationMixer(door);
-  gltf.animations.forEach((clip)=>actions[clip.name]=mixer.clipAction(clip));
+// smoothed mouse ray (for natural ripples)
+const mouseRay = { origin: new THREE.Vector3(), dir: new THREE.Vector3() };
+const smMouse  = { origin: new THREE.Vector3(), dir: new THREE.Vector3() };
+const MOUSE_SMOOTH = 0.16;  // lower = smoother (0.12–0.25 is good)
+
+// ==== Mouse tracking for particle disturbance ====
+const raycasterMouse = new THREE.Raycaster();
+const mouseMove = new THREE.Vector2();
+const mouse3D = new THREE.Vector3();
+
+// mouse 2D coords track karo
+window.addEventListener("mousemove", (e)=>{
+  mouseMove.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouseMove.y = -(e.clientY / window.innerHeight) * 2 + 1;
 });
 
-function fitCameraToObject(camera, object, offset=0.19){
-  const box=new THREE.Box3().setFromObject(object);
-  const size=box.getSize(new THREE.Vector3());
-  const center=box.getCenter(new THREE.Vector3());
-  object.position.sub(center);
-  const fov=camera.fov*(Math.PI/180);
-  const aspect=camera.aspect;
-  const cameraZByHeight=(size.y/2)/Math.tan(fov/2);
-  const cameraZByWidth=(size.x/2)/(Math.tan(fov/2)*aspect);
-  let cameraZ=Math.max(cameraZByHeight,cameraZByWidth);
-  cameraZ*=offset;
-  camera.position.set(0,0,cameraZ);
-  camera.lookAt(0,0,0);
-  controls.target.set(0,0,0);
-  controls.update();
+
+
+
+/* ===== Helpers ===== */
+const findNode=(root,name)=>{
+  let out=null;
+  root.traverse(n=>{ if(n.name && n.name.includes(name)) out=n; });
+  return out;
+};
+
+let doorCenter=null, islandCenter=null, bgCenter=null;
+
+/* ===== FLIGHT / CAMERA TUNING ===== */
+const FLIGHT = {
+  fastPart: 0.26,          // start me thoda tez pickup
+  settleDrop: 18,          // end par -Y drop
+  forwardLook: 120,        // forward lock distance for target
+  endZoomScale: 1.18,      // focal length multiplier
+  endZoomMax: 45           // mm cap
+};
+
+// last stop pose (B-restore & distance lock)
+let lastStop = {
+  pos: new THREE.Vector3(),
+  quat: new THREE.Quaternion(),
+  target: new THREE.Vector3(),
+  focalLength: null, // mm
+  distance: 0,
+  valid: false
+};
+const LOCK_DISTANCE_ON_B = true;
+
+/* =========================== */
+/* ===== PARTICLE SYSTEM ===== */
+/* =========================== */
+/* ========== Continuous River Particles ========== */
+/* ========== Continuous River Particles ========== */
+/* =========================== */
+/* ===== ARC RIVER SYSTEM ===== */
+/* =========================== */
+const RIVER_COUNT = 50000;
+
+const geoBlue = new THREE.BufferGeometry();
+const geoRed  = new THREE.BufferGeometry();
+
+const posBlue = new Float32Array(RIVER_COUNT * 3);
+const posRed  = new Float32Array(RIVER_COUNT * 3);
+const velBlue = new Float32Array(RIVER_COUNT * 3);
+const velRed  = new Float32Array(RIVER_COUNT * 3);
+
+// control points
+const p0Blue = new Float32Array(RIVER_COUNT * 3);
+const c1Blue = new Float32Array(RIVER_COUNT * 3);
+const c2Blue = new Float32Array(RIVER_COUNT * 3);
+const tBlue  = new Float32Array(RIVER_COUNT);
+const spBlue = new Float32Array(RIVER_COUNT);
+
+const p0Red = new Float32Array(RIVER_COUNT * 3);
+const c1Red = new Float32Array(RIVER_COUNT * 3);
+const c2Red = new Float32Array(RIVER_COUNT * 3);
+const tRed  = new Float32Array(RIVER_COUNT);
+const spRed = new Float32Array(RIVER_COUNT);
+const coolBlue = new Float32Array(RIVER_COUNT);
+const coolRed  = new Float32Array(RIVER_COUNT);
+
+function cubicBezier(p0, c1, c2, p3, t, out){
+  const u = 1 - t, tt = t*t, uu = u*u, uuu = uu*u, ttt = tt*t;
+  out.x = uuu*p0.x + 3*uu*t*c1.x + 3*u*tt*c2.x + ttt*p3.x;
+  out.y = uuu*p0.y + 3*uu*t*c1.y + 3*u*tt*c2.y + ttt*p3.y;
+  out.z = uuu*p0.z + 3*uu*t*c1.z + 3*u*tt*c2.z + ttt*p3.z;
+  return out;
 }
 
-/* Click → Door animation + Island reveal */
-splash.addEventListener("click",()=>{
-  if(!readyForClick || !door || !mixer) return;
+// ADD THIS (ye pehle missing tha):
+function cubicBezierDeriv(p0, c1, c2, p3, t, out){
+  const u = 1 - t;
+  out.x = 3 * (u*u*(c1.x - p0.x) + 2*u*t*(c2.x - c1.x) + t*t*(p3.x - c2.x));
+  out.y = 3 * (u*u*(c1.y - p0.y) + 2*u*t*(c2.y - c1.y) + t*t*(p3.y - c2.y));
+  out.z = 3 * (u*u*(c1.z - p0.z) + 2*u*t*(c2.z - c1.z) + t*t*(p3.z - c2.z));
+  return out;
+}
 
-  gsap.to(splash,{duration:1.5,opacity:0,onComplete:()=>splash.style.display="none"});
+function spawnArcParticle(i, side, posArr, p0Arr, c1Arr, c2Arr, tArr, spArr) {
+  if (!doorCenter) return;
 
-  const anim=actions["Open"]||Object.values(actions)[0];
-  if(anim){
-    anim.reset().setLoop(THREE.LoopOnce,1);
-    anim.clampWhenFinished=true;
-    anim.play();
+  const spread = 650; // ✅ wider stream (try 100–200 for width control)
+
+  // Start position (bottom corners with random spread)
+  const p0 = new THREE.Vector3(
+    side * (window.innerWidth * 0.60 + (Math.random() - 0.5) * spread),
+    -160 + Math.random() * 40,   // thoda upar/neeche variation
+    200 + Math.random() * 80     // z-depth variation
+  );
+
+  // First control point (low curve + random jitter)
+  const c1 = new THREE.Vector3(
+    side * (window.innerWidth * 0.24 + (Math.random() - 0.5) * spread),
+    -200 + Math.random() * 60,
+    150 + Math.random() * 60
+  );
+
+  // Second control point (near door, thoda variation)
+const c2 = new THREE.Vector3(
+  side * (320 + (Math.random() - 0.5) * spread),
+  10 + Math.random() * 20,
+  60 + Math.random() * 40
+);
+
+  // End point = door ke thoda neeche center
+// End point = door ke thoda neeche center + width variation
+const p3 = doorCenter.clone();
+p3.y -= 20 + (Math.random() - 6.5) * 15;   // y variation
+p3.x += (Math.random() - 0.5) * 140;        // x variation
+p3.z += 15 + (Math.random() - 0.5) * 20;   // z variation
+  // Save attributes
+  const idx = i * 3;
+  p0Arr[idx] = p0.x; p0Arr[idx + 1] = p0.y; p0Arr[idx + 2] = p0.z;
+  c1Arr[idx] = c1.x; c1Arr[idx + 1] = c1.y; c1Arr[idx + 2] = c1.z;
+  c2Arr[idx] = c2.x; c2Arr[idx + 1] = c2.y; c2Arr[idx + 2] = c2.z;
+
+  posArr[idx] = p0.x; posArr[idx + 1] = p0.y; posArr[idx + 2] = p0.z;
+
+  // ✅ Random phase offset so all particles not in sync
+  tArr[i] = Math.random();
+ // narrow speed band → koi particle over-fast nahi lagega
+spArr[i] = THREE.MathUtils.lerp(0.00080, 0.00070, Math.random()); // start se hi tez
+
+}
+
+
+function initRivers(){
+  for(let i=0;i<RIVER_COUNT;i++){
+    spawnArcParticle(i, -1, posBlue, p0Blue, c1Blue, c2Blue, tBlue, spBlue);
+    spawnArcParticle(i, +1, posRed,  p0Red,  c1Red,  c2Red,  tRed,  spRed);
+  }
+  geoBlue.setAttribute("position", new THREE.BufferAttribute(posBlue,3));
+  geoRed.setAttribute("position",  new THREE.BufferAttribute(posRed,3));
+
+  riversReady = true;
+
+  // NEW: hyper-real repel recovery ke liye cooldown arrays clear
+  coolBlue.fill(0);
+  coolRed.fill(0);
+}
+
+function updateRiverSide(geo, posArr, p0Arr, c1Arr, c2Arr, tArr, spArr, velArr, side){
+  if (!geo || !geo.attributes || !geo.attributes.position) return;
+
+  // side ke hisaab se correct cooldown buffer
+  const coolArr = (side < 0) ? coolBlue : coolRed;
+
+  // scene targets
+  const end = doorCenter ? doorCenter.clone() : new THREE.Vector3(0,0,0);
+
+  // ----- master tunables (hyper-real feel) -----
+  const DT   = Math.min(1, delta * 60);       // framerate normalize (~60fps units)
+
+  // pull to path (smaller = less rubber band)
+  const KP_BASE = 0.030;                      // try 0.020–0.028
+const KD      = 0.16;  // damping thodi kam
+const AIR     = 0.010; // air drag kam
+const VEL_MAX = 1.2;  // top speed zyada
+const ALIGN   = 0.090; // along-the-path pull thoda zyada
+
+  // early-phase kick for faster start
+const ALONG_KICK = 0.22;          // 0.18–0.28 try karo
+const EARLY_LEN  = 0.25;          // first 25% of path = boost
+
+  // mouse repel
+  const MOUSE_RADIUS = 6.0;                   // influence radius
+  const MOUSE_FORCE_BASE = 3.75;               // base strength
+  const SWIRL_FORCE = 2.90;                   // lateral swirl
+  const COOLDOWN_FR = 14.0;                   // frames to “cool” after repel
+
+  // smooth power curve helper
+  const smooth5 = (t)=>{ const t3=t*t*t; return t3*(10 - 15*t + 6*t*t); };
+
+  // mouse ray (smoothed) already prepared per frame:
+  raycasterMouse.setFromCamera(mouseMove, camera);
+  mouseRay.origin.copy(raycasterMouse.ray.origin);
+  mouseRay.dir.copy(raycasterMouse.ray.direction);
+  smMouse.origin.lerp(mouseRay.origin,  MOUSE_SMOOTH);
+  smMouse.dir.lerp(  mouseRay.dir,    MOUSE_SMOOTH).normalize();
+
+  // scratch
+  const P0 = new THREE.Vector3(), C1 = new THREE.Vector3(), C2 = new THREE.Vector3();
+  const base = new THREE.Vector3(), dP = new THREE.Vector3(), tan = new THREE.Vector3();
+
+  for (let i=0; i<RIVER_COUNT; i++){
+    // advance along curve
+    tArr[i] += spArr[i];
+    if (tArr[i] >= 1){
+      spawnArcParticle(i, side, posArr, p0Arr, c1Arr, c2Arr, tArr, spArr);
+      // reset cooldown on respawn
+      coolArr[i] = 0;
+      continue;
+    }
+
+    const idx = i*3;
+
+    // Bezier base point + tangent
+    P0.set(p0Arr[idx],   p0Arr[idx+1],   p0Arr[idx+2]);
+    C1.set(c1Arr[idx],   c1Arr[idx+1],   c1Arr[idx+2]);
+    C2.set(c2Arr[idx],   c2Arr[idx+1],   c2Arr[idx+2]);
+    cubicBezier(P0, C1, C2, end, tArr[i], base);
+    cubicBezierDeriv(P0, C1, C2, end, tArr[i], tan).normalize();
+
+    // current pos/vel
+    let px = posArr[idx], py = posArr[idx+1], pz = posArr[idx+2];
+    let vx = velArr[idx], vy = velArr[idx+1], vz = velArr[idx+2];
+
+    // distance to base path
+    dP.set(base.x - px, base.y - py, base.z - pz);
+    const distToPath = dP.length();
+
+    // near-the-end softening →  rubber-band snap kam
+    const endEase = 1.0 - smooth5( THREE.MathUtils.clamp((tArr[i]-0.70)/0.30, 0, 1) );
+    // cooldown softening (repel ke turant baad)
+    const coolFactor = (coolArr[i] > 0) ? THREE.MathUtils.smoothstep(coolArr[i], 0, COOLDOWN_FR) : 0.0;
+
+    // spring pull (reduced by endEase and cooldown)
+    const KP = KP_BASE * (0.6 + 0.4*Math.min(1, distToPath/40)) * endEase * (1.0 - 0.75*coolFactor);
+    vx += dP.x * KP * DT;
+    vy += dP.y * KP * DT;
+    vz += dP.z * KP * DT;
+
+    // tangent alignment (particles flow along the curve)
+    vx += tan.x * ALIGN * DT;
+    vy += tan.y * ALIGN * DT;
+    vz += tan.z * ALIGN * DT;
+
+
+// early-phase extra push along the curve
+const early = 1.0 - THREE.MathUtils.clamp((tArr[i]) / EARLY_LEN, 0, 1);
+if (early > 0.0){
+  vx += tan.x * (ALONG_KICK * early) * DT;
+  vy += tan.y * (ALONG_KICK * early) * DT;
+  vz += tan.z * (ALONG_KICK * early) * DT;
+}
+
+
+
+    // mouse-ray repel (true closest-point to ray)
+    const toPoint  = new THREE.Vector3(px,py,pz).sub(smMouse.origin);
+    const projLen  = toPoint.dot(smMouse.dir);
+    const closest  = smMouse.origin.clone().addScaledVector(smMouse.dir, projLen);
+    const offset   = new THREE.Vector3(px,py,pz).sub(closest);
+    const dist     = offset.length();
+
+    if (dist < MOUSE_RADIUS){
+      const fall = Math.exp(- (dist*dist) / (2 * (MOUSE_RADIUS*0.85) * (MOUSE_RADIUS*0.85)) );
+      if (dist > 1e-6) offset.multiplyScalar(1/dist);
+
+      const force = MOUSE_FORCE_BASE * (1.0 + 0.4*Math.sin(i*1.37)) * (1.0 - 0.5*coolFactor);
+      const repel = offset.clone().multiplyScalar(force * fall);
+      const swirl = new THREE.Vector3().crossVectors(smMouse.dir, offset).normalize().multiplyScalar(SWIRL_FORCE * fall);
+
+      vx += (repel.x + swirl.x) * DT;
+      vy += (repel.y + swirl.y) * DT;
+      vz += (repel.z + swirl.z) * DT;
+
+      // start / extend cooldown with slight randomness
+      const jitter = 0.8 + 0.4*Math.random();
+      coolArr[i] = Math.max(coolArr[i], COOLDOWN_FR * jitter);
+    }
+
+    // low-frequency drift (cinematic smoke)
+    const phase = i * 1.274 + performance.now() * 0.00035;
+    vx += Math.sin(phase)         * 0.055 * DT;
+    vy += Math.cos(phase * 0.9)   * 0.045 * DT;
+    vz += Math.sin(phase * 0.7+1) * 0.040 * DT;
+
+    // air drag + damping (fps-independent)
+    const damp = 1.0 - KD * DT;
+    vx = (vx * damp) - vx * AIR * DT;
+    vy = (vy * damp) - vy * AIR * DT;
+    vz = (vz * damp) - vz * AIR * DT;
+
+    // speed clamp
+    const speed = Math.hypot(vx, vy, vz);
+    if (speed > VEL_MAX){
+      const s = VEL_MAX / speed;
+      vx *= s; vy *= s; vz *= s;
+    }
+
+    // integrate
+    px += vx;
+    py += vy;
+    pz += vz;
+
+    // write back
+    posArr[idx]   = px;  posArr[idx+1] = py;  posArr[idx+2] = pz;
+    velArr[idx]   = vx;  velArr[idx+1] = vy;  velArr[idx+2] = vz;
+
+    // cooldown tick
+    if (coolArr[i] > 0) coolArr[i] = Math.max(0, coolArr[i] - DT);
   }
 
-  // Camera slow cinematic zoom into door
-  gsap.to(camera.position,{
-    duration:6,
-    z:0.5,
-    ease:"power2.inOut",
-    onComplete:()=>{
-      gsap.to(door,{duration:0.5,opacity:0,onComplete:()=>door.visible=false});
+  geo.attributes.position.needsUpdate = true;
+}
 
-      // 🔵 Blue BG
-      renderer.setClearColor(0xffffff,1);
 
-      // Load Island GLB
-      new THREE.GLTFLoader().load("./Island.glb",(gltf)=>{
-        const island=gltf.scene;
-        scene.add(island);
 
-        // ✅ Auto-scale & center
-        const box=new THREE.Box3().setFromObject(island);
-        const size=box.getSize(new THREE.Vector3());
-        const maxAxis=Math.max(size.x,size.y,size.z);
-        if(maxAxis < 5){ island.scale.setScalar(5/maxAxis); }
-        const center=box.getCenter(new THREE.Vector3());
-        island.position.sub(center);
 
-        // ✅ Smooth cinematic camera move
-        fitCameraToObject(camera, island, 1.2);
-        gsap.to(camera.position,{duration:5,x:0,y:10,z:25,ease:"power2.inOut"});
-        gsap.to(controls.target,{duration:5,x:0,y:0,z:0,ease:"power2.inOut"});
+function animateRivers(){
+   if (!riversReady) return;  
+  updateRiverSide(geoBlue,posBlue,p0Blue,c1Blue,c2Blue,tBlue,spBlue,velBlue,-1);
+  updateRiverSide(geoRed,posRed,p0Red,c1Red,c2Red,tRed,spRed,velRed,+1);
+}
+
+
+
+
+const particleTex = new THREE.TextureLoader().load('particle2.png');
+particleTex.encoding = THREE.sRGBEncoding;
+
+function makeMat(hex){
+  const m = new THREE.PointsMaterial({
+    map: particleTex,
+    color: hex,
+    size: 9.2,
+    transparent: true,
+    opacity: 1,                 // ↓ kam rakho: 0.18–0.35
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,             // particles ko stack hone do, halo soft
+    depthTest: true,
+    sizeAttenuation: true
+  });
+  m.toneMapped = true;            // ACES exposure ka asar band → less blowout
+  return m;
+}
+
+const matBlue = makeMat(0x001A6E); // dark blue
+const matRed  = makeMat(0x8B0000); // wine red
+
+// points
+const pointsBlue = new THREE.Points(geoBlue, matBlue);
+const pointsRed  = new THREE.Points(geoRed , matRed);
+pointsBlue.renderOrder = pointsRed.renderOrder = 10;  // clouds ke baad
+pointsBlue.frustumCulled = pointsRed.frustumCulled = false; // edge pe pop na ho
+scene.add(pointsBlue, pointsRed);
+
+
+
+
+
+/* =========================== */
+/* ===== LOAD THE GLB ======== */
+/* =========================== */
+new THREE.GLTFLoader().load("./Background (9).glb",(gltf)=>{
+  root=gltf.scene; scene.add(root);
+
+  configureCloudMaterials(root);
+
+  mixer=new THREE.AnimationMixer(root);
+  gltf.animations.forEach((clip)=>actions[clip.name]=mixer.clipAction(clip));
+
+  // Door
+  const doorNode=findNode(root,"DoorShape_2");
+  if(doorNode){
+    root.updateMatrixWorld(true);
+    const doorBox=new THREE.Box3().setFromObject(doorNode);
+    doorCenter=doorBox.getCenter(new THREE.Vector3());
+    const doorSize=doorBox.getSize(new THREE.Vector3());
+    const distance=Math.max(doorSize.x,doorSize.y)*1.9;
+
+    camera.position.set(doorCenter.x,doorCenter.y,doorCenter.z+distance);
+    camera.lookAt(doorCenter);
+    controls.target.copy(doorCenter);
+    controls.update();
+      initRivers();
+
+  }
+
+  // Island (prefer)
+  const islandBox=new THREE.Box3();
+  root.traverse(n=>{
+    if(n.name && ["Island","IslandG","OceanPIV"].some(k=>n.name.includes(k))){
+      islandBox.expandByObject(n);
+    }
+  });
+  if(!islandBox.isEmpty()) islandCenter=islandBox.getCenter(new THREE.Vector3());
+
+  // Background (fallback)
+  const bgBox=new THREE.Box3();
+  root.traverse(n=>{
+    if(n.name && ["WallPIV","IS_About_Us","IS_Access","IS_Company","IS_Contact","IS_Service","IS_SNS","IS_Work","OceanPIV"].some(k=>n.name.includes(k))){
+      bgBox.expandByObject(n);
+    }
+  });
+  if(!bgBox.isEmpty()) bgCenter=bgBox.getCenter(new THREE.Vector3());
+});
+
+function configureCloudMaterials(root){
+  root.traverse(obj=>{
+    if(obj.isMesh && obj.name && obj.name.includes("Cloud")){
+      const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+      mats.forEach(m=>{
+        if(!m) return;
+        m.side = THREE.DoubleSide;
+        m.transparent = true;
+        m.depthWrite = false;   // inside visibility ok
+        // m.depthTest = true;   // keep depth test ON
+      });
+      obj.renderOrder = 2;
+      obj.frustumCulled = false;
+    }
+  });
+}
+
+/* =========================== */
+/* ===== START SEQUENCE ====== */
+/* =========================== */
+let flightStarted = false;
+
+splash.addEventListener("click", ()=> {
+  if (!readyForClick || !root || flightStarted) return;
+  flightStarted = true;
+
+  gsap.to(splash,{duration:2,opacity:0,onComplete:()=>splash.style.display="none"});
+  knockText.classList.remove("show"); 
+  knockText.classList.add("hide");
+
+  const action = actions["DoorOpen"] || actions["Open"] || null;
+
+  // 0) Door animation start right away (no waiting)
+  if (action){
+    action.reset().setLoop(THREE.LoopOnce,1);
+    setTimeout(runCameraPath, 200);
+    action.clampWhenFinished = true;
+    action.play();
+  }
+
+  // 1) Camera flight start immediately (same click)
+  runCameraPath();  // ← no timeout, no 'finished' listener
+});
+
+/* =========================== */
+/* ===== CAMERA TIMELINE ===== */
+/* =========================== */
+function runCameraPath(){
+  if(!root) return;
+
+  // Kill old tweens & freeze exact start pose (blink/back-view fix)
+  gsap.killTweensOf([camera, camera.position, camera.quaternion, camera.rotation, camera]);
+  controls.enabled = false;
+
+  // ---- Start pose (lock) ----
+  const startPos  = camera.position.clone();
+  const startQuat = camera.quaternion.clone();
+  const fwd       = new THREE.Vector3(0,0,-1).applyQuaternion(startQuat).normalize();
+
+  camera.position.copy(startPos);
+  camera.quaternion.copy(startQuat);
+
+  // ---- Target center (island preferred; fallback bgCenter) ----
+  const islandBox = (() => {
+    const box = new THREE.Box3(); let ok=false;
+    root.traverse(n=>{
+      if(n.isMesh && n.name && (n.name.includes("Island")||n.name.includes("IslandG")||n.name.includes("OceanPIV"))){
+        box.expandByObject(n); ok=true;
+      }
+    });
+    return ok ? box : null;
+  })();
+  const targetCenter = islandBox ? islandBox.getCenter(new THREE.Vector3())
+                                 : (bgCenter || startPos.clone().addScaledVector(fwd,1200));
+
+  // ---- Travel distance L (straight ahead), stop a little before target ----
+  const toTarget = new THREE.Vector3().subVectors(targetCenter, startPos);
+  const proj     = toTarget.dot(fwd);                    // ahead along start forward
+  const STOP_BEFORE = 320;                               // ~target se pehle rokna
+  let L = THREE.MathUtils.clamp(proj - STOP_BEFORE, 900, 2000);
+
+  // ---- Subtle sway (movie-ish), first 8% dead straight ----
+  const cloudBox = (()=>{ const b=new THREE.Box3(); let ok=false;
+    root.traverse(o=>{ if(o.isMesh && o.name && o.name.includes("Cloud")){ b.expandByObject(o); ok=true; }});
+    return ok?b:null;
+  })();
+  const cSize = cloudBox ? cloudBox.getSize(new THREE.Vector3()) : new THREE.Vector3(600,300,600);
+  
+  // Build an orthonormal basis
+  let upWorld = new THREE.Vector3(0,1,0);
+  if (Math.abs(fwd.dot(upWorld)) > 0.98) upWorld.set(1,0,0);
+  const right = new THREE.Vector3().crossVectors(fwd, upWorld).normalize();
+  const up    = new THREE.Vector3().crossVectors(right, fwd).normalize();
+
+  const ampRight = Math.min(cSize.x*0.12, 110);
+  const ampUp    = Math.min(cSize.y*0.10,  70);
+  const smooth5  = t=>{ const t3=t*t*t; return t3*(10 - 15*t + 6*t*t); };
+
+  function sway(u){
+    const u2 = u<=0.08 ? 0 : (u-0.08)/0.92;           // first 8% = straight
+    const w  = smooth5(THREE.MathUtils.clamp(u2,0,1));
+    const a  = Math.sin(u * Math.PI * 1.0)       * ampRight * w;
+    const b  = Math.cos(u * Math.PI * 0.85 + .6) * ampUp    * w * 0.85;
+    return right.clone().multiplyScalar(a).add(up.clone().multiplyScalar(b));
+  }
+
+  // Analytic path (no lookAt, no quaternion changes during flight)
+  function positionAt(u){ return startPos.clone().addScaledVector(fwd, u*L).add(sway(u)); }
+
+  // Start slow → mid fast → end slow (with a quicker pickup at start portion)
+  const state = { t: 0 };
+  const totalDuration = THREE.MathUtils.clamp(L*0.07, 12, 22)
+  const FAST_PART = 0.25; // time portion for quicker pickup
+  function timeRemap(t){
+    if (t < FAST_PART) return (t/FAST_PART)*0.45;
+    return 0.35 + (t-FAST_PART)/(1-FAST_PART)*0.55;
+  }
+
+  gsap.to(state, {
+    t: 1, duration: totalDuration, ease: "power3.inOut",
+    onUpdate: ()=>{
+      const u = timeRemap(state.t);
+      camera.position.copy( positionAt(u) );
+      camera.quaternion.copy(startQuat);  // lock orientation → no flip/back view
+    },
+    onComplete: ()=>{
+      // ---- End settle (halka -Y) + small zoom-in only ----
+      const SETTLE_DROP = -12;            // pixels-ish; try 10–18
+      const LOOK_AHEAD  = 120;           // controls ke target ke liye
+      const finalFov    = Math.max(32, camera.fov-3); // small zoom-in (NEVER zoom-out)
+
+      const ahead = camera.position.clone().addScaledVector(fwd, LOOK_AHEAD);
+
+      // y drop
+      gsap.to(camera.position, {
+        y: camera.position.y - SETTLE_DROP,
+        duration: 0.50, ease: "sine.inOut",
+        onUpdate: ()=> camera.lookAt(ahead),
+        onComplete: ()=>{
+          // tiny zoom-in
+          gsap.to(camera, {
+            fov: finalFov, duration: 0.30, ease: "sine.out",
+
+            onUpdate: ()=> camera.updateProjectionMatrix(),
+            onComplete: ()=>{
+              // hand controls to user at the same view
+              controls.enabled = true;
+              controls.enableZoom = true;                 // no locks
+              controls.minDistance = 1;
+              controls.maxDistance = 3800;
+              controls.target.copy(ahead);
+              controls.update();
+            }
+          });
+        }
       });
     }
   });
+}
 
-  // Gradient fade out
-  gsap.to(lightOverlay,{
-    opacity:0,
-    duration:0.9,
-    delay:2,
-    ease:"power2.out",
-    onComplete:()=>lightOverlay.classList.remove("show")
-  });
 
-  readyForClick=false;
+
+/* =========================== */
+/* === CLICK-FOCUS SYSTEM ==== */
+/* =========================== */
+const raycaster=new THREE.Raycaster();
+const mouse=new THREE.Vector2();
+let currentTargetMesh=null;
+let currentFocusedMesh = null;
+
+renderer.domElement.addEventListener("click", (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+
+  const clickableMeshes = [];
+  if (root) {
+    root.traverse((child) => {
+      if (
+        child.isMesh &&
+        ["IS_About_Us", "IS_Access", "IS_Company", "IS_Contact", "IS_Service", "IS_SNS", "IS_Work"]
+          .some((n) => child.name.includes(n))
+      ) {
+        clickableMeshes.push(child);
+      }
+    });
+  }
+
+  const hits = raycaster.intersectObjects(clickableMeshes, true);
+  if (hits.length > 0) {
+    const mesh = hits[0].object;
+    focusOnMesh(mesh); // simple focus
+  }
 });
 
-/* Animate loop */
+
+
+
+
+function focusOnMesh(mesh) {
+  // agar same mesh dobara click hua to kuch mat karo
+  if (currentFocusedMesh === mesh) return;
+  currentFocusedMesh = mesh;
+
+  // mesh ka bounding box aur center
+  const box = new THREE.Box3().setFromObject(mesh);
+  const center = box.getCenter(new THREE.Vector3());
+  const size = box.getSize(new THREE.Vector3());
+
+  // camera distance calculate (object ke size se thoda zyada)
+  const distance = Math.max(size.x, size.y, size.z) * 1.8 + 300;
+
+  // camera ka naya position (mesh ke samne + thoda upar)
+  const dir = new THREE.Vector3(0, 0, 1); // samne se dekhne ke liye
+  const targetPos = center.clone()
+    .addScaledVector(dir, distance)
+    .add(new THREE.Vector3(0, size.y * 0.2, 0));
+
+  // camera smooth transition
+  gsap.to(camera.position, {
+    duration: 1,
+    x: targetPos.x,
+    y: targetPos.y,
+    z: targetPos.z,
+    ease: "power2.inOut",
+    onUpdate: () => {
+      camera.lookAt(center);
+    }
+  });
+
+  // controls target bhi smooth update
+  gsap.to(controls.target, {
+    duration: 1,
+    x: center.x,
+    y: center.y,
+    z: center.z,
+    ease: "power2.inOut"
+  });
+}
+/* =========================== */
+/* === Shortcuts: B / U / L == */
+/* =========================== */
+window.addEventListener("keydown",(e)=>{
+  if(e.key==="b"||e.key==="B"){
+    if(!lastStop.valid) return;
+
+    gsap.killTweensOf([camera, camera.position, camera.quaternion, camera]);
+    camera.position.copy(lastStop.pos);
+    camera.quaternion.copy(lastStop.quat);
+
+    if (typeof lastStop.fov === "number"){
+      camera.fov = lastStop.fov;
+      camera.updateProjectionMatrix();
+    }
+
+    controls.enabled = true;
+    controls.target.copy(lastStop.target);
+
+    if (LOCK_DISTANCE_ON_B){
+      controls.enableZoom = false;
+      controls.minDistance = lastStop.distance;
+      controls.maxDistance = lastStop.distance;
+    } else {
+      controls.enableZoom = true;
+      controls.minDistance = 1;
+      controls.maxDistance = 5000;
+    }
+    controls.update();
+  }
+});
+
+
+/* =========================== */
+/* ===== RENDER LOOP ========= */
+/* =========================== */
 function animate(){
   requestAnimationFrame(animate);
-  const dt=clock.getDelta();
-  if(mixer) mixer.update(dt);
-  controls.update();
-  renderer.render(scene,camera);
+  delta = clock.getDelta();
+  dtSec = delta; // ✅ correct: use the same delta for physics
+  if (mixer) mixer.update(delta);
+  if (controls.enabled) controls.update();
+  renderer.render(scene, camera);
+  animateRivers();   // ✅ sirf arc wala
+ 
 }
+
 animate();
 
 window.addEventListener("resize",()=>{
@@ -217,6 +874,6 @@ window.addEventListener("resize",()=>{
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
-</script>
+  </script>
 </body>
 </html>
